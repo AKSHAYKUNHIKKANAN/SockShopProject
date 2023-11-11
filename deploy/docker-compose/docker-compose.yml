@@ -11,7 +11,7 @@ services:
   edge-router:
     image: weaveworksdemos/edge-router:0.1.1
     ports:
-      - '80:80'
+      - '8085:80'
       - '8080:8080'
     cap_drop:
       - all
@@ -173,3 +173,9 @@ services:
     read_only: true
     hostname: user-simulator
     command: "-d 60 -r 200 -c 2 -h edge-router"
+  integration-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.integration-tests
+    depends_on:
+      - edge-router

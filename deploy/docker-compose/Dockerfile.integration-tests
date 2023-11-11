@@ -1,0 +1,17 @@
+# Use a base image with necessary tools
+FROM alpine:latest
+
+
+RUN apk --no-cache add curl
+
+
+WORKDIR /tests
+
+
+COPY login_script.sh .
+
+
+RUN chmod +x /tests/login_script.sh
+
+
+CMD ["sh", "/tests/login_script.sh"]
