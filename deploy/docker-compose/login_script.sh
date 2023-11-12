@@ -43,6 +43,20 @@ if [ "$status_code" -eq 200 ] && [ -n "$response_body" ]; then
 else
   red_echo "Test Case 2: Get catalogue Failed"
 fi
+categories_url="http://edge-router/catalogue?tag=sport"
+categories_response=$(curl -s -w "%{http_code}" "$categories_url")
+
+
+status_code="${categories_response: -3}"
+response_body="${categories_response:0:${#categories_response}-3}"
+
+echo "$response_body"
+
+if [ "$status_code" -eq 200 ] && [ -n "$response_body" ]; then
+  green_echo "Test Case 3: Get catalogue Successful"
+else
+  red_echo "Test Case 3: Get catalogue Failed"
+fi
 
 
 customers_url="http://edge-router/customers"
@@ -55,7 +69,7 @@ response_body="${customers_response:0:${#customers_response}-3}"
 echo "$response_body"
 
 if [ "$status_code" -eq 200 ] && [ -n "$response_body" ]; then
-  green_echo "Test Case 3: Get Customers Successful"
+  green_echo "Test Case 4: Get Customers Successful"
 else
-  red_echo "Test Case 3: Get Customers Failed"
+  red_echo "Test Case 4: Get Customers Failed"
 fi
