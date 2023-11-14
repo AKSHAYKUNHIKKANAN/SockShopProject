@@ -1,17 +1,11 @@
-# Use a base image with necessary tools
-FROM alpine:latest
+
+FROM openjdk:17
 
 
-RUN apk --no-cache add curl
+
+WORKDIR /app
 
 
-WORKDIR /tests
+COPY ./DockerTest-0.0.1-SNAPSHOT.jar /app/DockerTest-0.0.1-SNAPSHOT.jar
 
-
-COPY login_script.sh .
-
-
-RUN chmod +x /tests/login_script.sh
-
-
-CMD ["sh", "/tests/login_script.sh"]
+CMD ["java", "-DskipTests=false", "-jar", "DockerTest-0.0.1-SNAPSHOT.jar"]
